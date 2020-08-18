@@ -1,3 +1,4 @@
+import os.path
 import logging
 import pandas as pd
 from joblib import Parallel, delayed
@@ -21,10 +22,16 @@ def screenshot(pairs):
     driver = webdriver.Chrome('chromedriver.exe', chrome_options=options)
     driver.set_window_size(1024, 2048)
     for hnid, url in pairs:
-        print(f'Processing {hnid} {url}')
-        driver.get(url)
-        driver.save_screenshot(f'data/images/{hnid}.png')
-        print(f'Done processing {hnid} {url}')
+        try:
+            if os.path.isfile(f'data/images/{hnid}.png'):
+                print(f'File already exists for {hnid} {url}')
+                continue
+            print(f'Processing {hnid} {url}')
+            driver.get(url)
+            driver.save_screenshot(f'data/images/{hnid}.png')
+            print(f'Done processing {hnid} {url}')
+        except Exception as e:
+            print('Error occurred for {hnid} {url}', e)
 
 
 def chonker(pairs, n):
