@@ -62,6 +62,7 @@ if __name__ == '__main__':
         id_vs_url[row.id] = row.url
 
     # We split the urls into chunks and run `n` webdrivers in parallel
+    # TODO remove the infinite loop and handle errors better
     while True:
         try:
             Parallel(n_jobs=args.n_jobs)(delayed(screenshot)(pair, args)
