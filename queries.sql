@@ -3,4 +3,5 @@ select id, timestamp, time, score, url from `bigquery-public-data.hacker_news.fu
 where url != 'null'
 and dead is not true
 and deleted is not true
+-- order by timestamp desc
 limit 10000
