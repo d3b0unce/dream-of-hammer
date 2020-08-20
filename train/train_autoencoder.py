@@ -14,11 +14,10 @@ rcParams['figure.figsize'] = 20, 20
 INPUT_SHAPE = [2036, 1012, 3]
 BATCH_SIZE = 1
 MODEL_SAVE_PATH = 'model.h5'
-EMBEDDING_SIZE = 256
 
 
 def make_autoencoder():
-    # Slightly larger than the autoencoder written by Fracois Chollet
+    # Slightly larger than the autoencoder written by Francois Chollet
     # here https://blog.keras.io/building-autoencoders-in-keras.html
 
     input_img = Input(shape=INPUT_SHAPE)
@@ -74,6 +73,8 @@ if __name__ = '__main__':
                         save_best_only=True,
                         save_weights_only=False,
                         verbose=1)
+    
+    autoencoder = make_autoencoder()
 
     autoencoder.fit(train_ds,
                     epochs=50,
